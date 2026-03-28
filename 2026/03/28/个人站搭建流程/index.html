@@ -1,0 +1,1325 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="个人站搭建流程, Ninja">
+    <meta name="description" content="一、部署网站1. 创建 Github Pages 仓库GitHub 主页右上角加号 -&amp;gt; New repository：
+
+Repository name 中输入 用户名.github.io
+勾选 “Initialize this r">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>个人站搭建流程 | Ninja</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Ninja</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Ninja</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">个人站搭建流程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Hexo/">
+                                <span class="chip bg-color">Hexo</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%8D%9A%E5%AE%A2/">
+                                <span class="chip bg-color">博客</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
+                                笔记
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-03-28
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.8k
+                </div>
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="一、部署网站"><a href="#一、部署网站" class="headerlink" title="一、部署网站"></a>一、部署网站</h1><h2 id="1-创建-Github-Pages-仓库"><a href="#1-创建-Github-Pages-仓库" class="headerlink" title="1. 创建 Github Pages 仓库"></a>1. 创建 Github Pages 仓库</h2><p>GitHub 主页右上角加号 -&gt; New repository：</p>
+<ul>
+<li>Repository name 中输入 <code>用户名.github.io</code></li>
+<li>勾选 “Initialize this repository with a README”</li>
+<li>Description 选填</li>
+</ul>
+<p>填好后点击 Create repository 创建。</p>
+<img src="image-20260328103541003.png" alt="创建仓库"  />
+
+<p>创建后默认自动启用 HTTPS，博客地址为：<code>https://ninjialog27.github.io</code></p>
+<h2 id="2-租-AutoDL-服务器"><a href="#2-租-AutoDL-服务器" class="headerlink" title="2. 租 AutoDL 服务器"></a>2. 租 AutoDL 服务器</h2><p>不跑深度学习，这块随便选就行：</p>
+<img src="image-20260328104055328.png" alt="租服务器" style="zoom:80%;" />
+
+<p>创建好了后迅速关机并且用无卡模式开机进行后续配置。</p>
+<p>用AutoDL官方提供的学术资源加速指令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">source</span> /etc/network_turbo<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h2 id="3-登录-AutoDL-服务器"><a href="#3-登录-AutoDL-服务器" class="headerlink" title="3. 登录 AutoDL 服务器"></a>3. 登录 AutoDL 服务器</h2><p>进入 AutoDL 的 Linux 终端，下面默认按 <strong>Ubuntu&#x2F;Linux</strong> 这种常见环境来写。</p>
+<p>先更新包索引：</p>
+<pre class="line-numbers language-none"><code class="language-none">sudo apt update<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<hr>
+<h2 id="4-安装-Git-和-Node-js"><a href="#4-安装-Git-和-Node-js" class="headerlink" title="4. 安装 Git 和 Node.js"></a>4. 安装 Git 和 Node.js</h2><p>Hexo 依赖 Node.js，命令行操作会用到 Git；Hexo 官方安装文档要求先准备 Node.js 和 Git。</p>
+<p>先检查服务器中是否有 Git（租的服务器一般都自带）：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token parameter variable">--version</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果已经有git工具则不用再次安装，如果没有就按照这个指令装 Git：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> <span class="token function">git</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后装 Node.js 和 npm：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://deb.nodesource.com/setup_20.x <span class="token operator">|</span> <span class="token function">bash</span> -
+<span class="token function">apt</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> nodejs<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>检查：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">node</span> <span class="token parameter variable">-v</span>
+<span class="token function">npm</span> <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="5-安装-Hexo-CLI"><a href="#5-安装-Hexo-CLI" class="headerlink" title="5. 安装 Hexo CLI"></a>5. 安装 Hexo CLI</h2><p>Hexo 官方命令体系依赖 <code>hexo-cli</code>。执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-g</span> hexo-cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>检查：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="6-初始化-Hexo-站点"><a href="#6-初始化-Hexo-站点" class="headerlink" title="6. 初始化 Hexo 站点"></a>6. 初始化 Hexo 站点</h2><p>在你想放项目的目录下执行，例如放在 home 目录：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~
+hexo init ninja
+<span class="token builtin class-name">cd</span> ninja
+<span class="token function">npm</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Hexo 官方说明 <code>hexo init [folder]</code> 会初始化一个站点。</p>
+<p>这一步之后，目录大概会有这些关键文件：</p>
+<ul>
+<li><code>_config.yml</code>：总站点配置</li>
+<li><code>source/_posts/</code>：文章目录</li>
+<li><code>themes/</code>：主题目录</li>
+<li><code>package.json</code>：依赖配置</li>
+</ul>
+<hr>
+<h2 id="7-先本地生成一次，确认-Hexo-没问题"><a href="#7-先本地生成一次，确认-Hexo-没问题" class="headerlink" title="7. 先本地生成一次，确认 Hexo 没问题"></a>7. 先本地生成一次，确认 Hexo 没问题</h2><p>先生成：</p>
+<pre class="line-numbers language-none"><code class="language-none">hexo g<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>再启动预览：</p>
+<pre class="line-numbers language-none"><code class="language-none">hexo s<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Hexo 官方说明 <code>hexo server</code> 默认在 <code>http://localhost:4000/</code> 提供预览。</p>
+<p>想在本地进行预览，就用 AutoDL 提供的隧道工具进行连接，配置方式如下：</p>
+<img src="image-20260328112229273.png" alt="隧道工具" style="zoom:50%;" />
+
+<hr>
+<h2 id="8-配置-Git-身份"><a href="#8-配置-Git-身份" class="headerlink" title="8. 配置 Git 身份"></a>8. 配置 Git 身份</h2><p>在 AutoDL 里配置 GitHub 身份：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> config <span class="token parameter variable">--global</span> user.name <span class="token string">"Github 用户名"</span>
+<span class="token function">git</span> config <span class="token parameter variable">--global</span> user.email <span class="token string">"Github 邮箱"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>检查：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> config <span class="token parameter variable">--global</span> <span class="token parameter variable">--list</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<hr>
+<h2 id="9-给-AutoDL-配置-SSH，允许推送到-GitHub"><a href="#9-给-AutoDL-配置-SSH，允许推送到-GitHub" class="headerlink" title="9. 给 AutoDL 配置 SSH，允许推送到 GitHub"></a>9. 给 AutoDL 配置 SSH，允许推送到 GitHub</h2><p>后面要从 AutoDL 直接 <code>hexo d</code> 推到 GitHub，所以要让这台机器有权限。</p>
+<h3 id="1）生成-SSH-key"><a href="#1）生成-SSH-key" class="headerlink" title="1）生成 SSH key"></a>1）生成 SSH key</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-keygen <span class="token parameter variable">-t</span> ed25519 <span class="token parameter variable">-C</span> <span class="token string">"你的GitHub邮箱"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>注意此处需要一路回车，完毕后再进行后续的步骤。</p>
+<h3 id="2）查看公钥"><a href="#2）查看公钥" class="headerlink" title="2）查看公钥"></a>2）查看公钥</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> ~/.ssh/id_ed25519.pub<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>复制输出内容。</p>
+<h3 id="3）去-GitHub-添加-SSH-key"><a href="#3）去-GitHub-添加-SSH-key" class="headerlink" title="3）去 GitHub 添加 SSH key"></a>3）去 GitHub 添加 SSH key</h3><p>GitHub 网页中：</p>
+<ul>
+<li>Settings</li>
+<li>SSH and GPG keys</li>
+<li>New SSH key</li>
+<li>粘贴刚才的公钥</li>
+</ul>
+<h3 id="4）测试连接"><a href="#4）测试连接" class="headerlink" title="4）测试连接"></a>4）测试连接</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-T</span> git@github.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>能连通后，说明：</p>
+<ul>
+<li>AutoDL 这台机器已经有权限推送到你的 GitHub 仓库</li>
+<li>可以继续做 <strong>Hexo 部署配置</strong> 了</li>
+</ul>
+<hr>
+<h2 id="10-安装-Hexo-的-Git-部署插件"><a href="#10-安装-Hexo-的-Git-部署插件" class="headerlink" title="10. 安装 Hexo 的 Git 部署插件"></a>10. 安装 Hexo 的 Git 部署插件</h2><p>先回到 Hexo 项目目录，比如我现在是 <code>~/ninja</code>：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/ninja
+<span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-git <span class="token parameter variable">--save</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>这一步的作用是：让 <code>hexo d</code> 能把生成好的静态网页直接推到 GitHub 仓库。</p>
+<hr>
+<h2 id="11-修改-config-yml"><a href="#11-修改-config-yml" class="headerlink" title="11. 修改 _config.yml"></a>11. 修改 <code>_config.yml</code></h2><p>直接用 AutoDL 自带的 JupyterLab 打开项目根目录下的 <code>_config.yml</code>，把最下面的 <code>deploy:</code> 改成这样：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">deploy</span><span class="token punctuation">:</span>
+  <span class="token key atrule">type</span><span class="token punctuation">:</span> git
+  <span class="token key atrule">repo</span><span class="token punctuation">:</span> git@github.com<span class="token punctuation">:</span>你的GitHub用户名/你的GitHub用户名.github.io.git
+  <span class="token key atrule">branch</span><span class="token punctuation">:</span> main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意两点：</p>
+<ul>
+<li>仓库名要真的是 <code>你的用户名.github.io</code></li>
+<li>分支一般是 <code>main</code>，如果你仓库默认分支是 <code>master</code>，就改成 <code>master</code></li>
+</ul>
+<hr>
+<h2 id="12-先写一篇测试文章"><a href="#12-先写一篇测试文章" class="headerlink" title="12. 先写一篇测试文章"></a>12. 先写一篇测试文章</h2><p>执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo new <span class="token string">"我的第一篇笔记"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后编辑新生成的文章文件，一般在：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">source/_posts/我的第一篇笔记.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>打开它：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nano</span> source/_posts/我的第一篇笔记.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>随便写一点内容，比如：</p>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token front-matter-block"><span class="token punctuation">---</span>
+<span class="token front-matter yaml language-yaml"><span class="token key atrule">title</span><span class="token punctuation">:</span> 我的第一篇笔记
+<span class="token key atrule">date</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-28 10:30:00</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> 测试
+<span class="token key atrule">categories</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> 笔记</span>
+<span class="token punctuation">---</span></span>
+
+这是我用 Hexo 搭建的个人网站测试文章。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="13-生成并部署"><a href="#13-生成并部署" class="headerlink" title="13. 生成并部署"></a>13. 生成并部署</h2><p>执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo clean
+hexo g
+hexo d<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>如果一切正常，Hexo 会：</p>
+<ul>
+<li>生成静态网页</li>
+<li>通过 Git 推到你的 <code>用户名.github.io</code> 仓库</li>
+</ul>
+<hr>
+<p>此时访问 <code>https://用户名.github.io/ </code> 即可。</p>
+<h1 id="二、维护源码仓库"><a href="#二、维护源码仓库" class="headerlink" title="二、维护源码仓库"></a>二、维护源码仓库</h1><h2 id="1-进入源码目录"><a href="#1-进入源码目录" class="headerlink" title="1. 进入源码目录"></a>1. 进入源码目录</h2><pre class="line-numbers language-none"><code class="language-none">cd ~&#x2F;ninja<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="2-建-gitignore"><a href="#2-建-gitignore" class="headerlink" title="2. 建 .gitignore"></a>2. 建 <code>.gitignore</code></h2><pre class="line-numbers language-none"><code class="language-none">vi .gitignore<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>填入：</p>
+<pre class="line-numbers language-none"><code class="language-none">node_modules&#x2F;
+public&#x2F;
+.deploy_git&#x2F;
+db.json
+.DS_Store<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>保存退出。</p>
+<h2 id="3-初始化并连接-private-仓库"><a href="#3-初始化并连接-private-仓库" class="headerlink" title="3. 初始化并连接 private 仓库"></a>3. 初始化并连接 private 仓库</h2><p>假设你已经在 GitHub 上建好了一个 private 仓库，名字叫 <code>ninja-source</code>：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> init
+<span class="token function">git</span> branch <span class="token parameter variable">-M</span> main
+<span class="token function">git</span> remote <span class="token function">add</span> origin git@github.com:你的GitHub用户名/ninja-source.git
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"init hexo source"</span>
+<span class="token function">git</span> push <span class="token parameter variable">-u</span> origin main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果之前已经 <code>git init</code> 过，就不用重复 init，只需要看 remote 怎么配。</p>
+<hr>
+<h2 id="4-以后每次改主题-改文章时"><a href="#4-以后每次改主题-改文章时" class="headerlink" title="4. 以后每次改主题&#x2F;改文章时"></a>4. 以后每次改主题&#x2F;改文章时</h2><p>都可以这样：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/ninja
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"change theme"</span> <span class="token comment"># 双引号里面的是这次提交源码的备注</span>
+<span class="token function">git</span> push
+
+hexo clean <span class="token operator">&amp;&amp;</span> hexo g <span class="token operator">&amp;&amp;</span> hexo d <span class="token comment"># 这是网站发布流程</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="5-以后的完整顺序"><a href="#5-以后的完整顺序" class="headerlink" title="5. 以后的完整顺序"></a>5. 以后的完整顺序</h2><p>改源码</p>
+<p>→ 生成并部署网站<br>→ 生成并部署网站</p>
+<h1 id="三、修改主题"><a href="#三、修改主题" class="headerlink" title="三、修改主题"></a>三、修改主题</h1><p>这部分更好的教程可以参考：<a target="_blank" rel="noopener" href="https://blinkfox.com/2018/09/28/qian-duan/hexo-bo-ke-zhu-ti-zhi-hexo-theme-matery-de-jie-shao/">Hexo博客主题之hexo-theme-matery的介绍</a>。</p>
+<h2 id="1-下载主题到-themes"><a href="#1-下载主题到-themes" class="headerlink" title="1. 下载主题到 themes/"></a>1. 下载主题到 <code>themes/</code></h2><p>主题 README 给的标准方式之一就是在 <code>themes</code> 目录里直接 <code>git clone</code>。</p>
+<p>执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/ninja/themes
+<span class="token function">git</span> clone https://github.com/blinkfox/hexo-theme-matery.git<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>下载完成后确认一下：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ls</span> ~/ninja/themes<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>应该能看到：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo-theme-matery<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<hr>
+<h2 id="2-把站点切换到这个主题"><a href="#2-把站点切换到这个主题" class="headerlink" title="2. 把站点切换到这个主题"></a>2. 把站点切换到这个主题</h2><p>打开站点根目录的 <code>_config.yml</code>，不是主题里的那个：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/ninja
+<span class="token function">vi</span> _config.yml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>找到这一行：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">theme<span class="token punctuation">:</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>改成：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">theme</span><span class="token punctuation">:</span> hexo<span class="token punctuation">-</span>theme<span class="token punctuation">-</span>matery<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这正是主题 README 要求的切换方式。</p>
+<p>顺手把这几个也检查一下，主题 README 也建议改：</p>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">url: https://ninjalog27.github.io
+language: zh-CN
+per_page: 12<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>其中：</p>
+<ul>
+<li><code>url</code> 要写你网站主地址</li>
+<li><code>language</code> 如果你主要写中文，建议 <code>zh-CN</code></li>
+<li><code>per_page</code> 主题作者建议设成 <strong>6 的倍数</strong>，比如 <code>12</code>、<code>18</code>，这样列表页排版更整齐。</li>
+</ul>
+<hr>
+<h2 id="3-先别急着高级配置，先最小启动"><a href="#3-先别急着高级配置，先最小启动" class="headerlink" title="3. 先别急着高级配置，先最小启动"></a>3. 先别急着高级配置，先最小启动</h2><p>这一步只做最小改动，先确认主题能跑起来。</p>
+<p>执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/ninja
+hexo clean
+hexo g<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>如果不报错，再开预览：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo s<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>打开：<code>http://localhost:4000/</code> 进行预览。</p>
+<hr>
+<h2 id="4-创建主题要求的几个核心页面"><a href="#4-创建主题要求的几个核心页面" class="headerlink" title="4. 创建主题要求的几个核心页面"></a>4. 创建主题要求的几个核心页面</h2><p><code>matery</code> 不是只改个 <code>theme:</code> 就完事，它还希望你补几个页面。README 明确给出了 <code>categories</code>、<code>tags</code>、<code>about</code> 的创建方式，<code>contact</code> 和 <code>friends</code> 是可选。</p>
+<h3 id="创建分类页"><a href="#创建分类页" class="headerlink" title="创建分类页"></a>创建分类页</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/ninja
+hexo new page <span class="token string">"categories"</span>
+<span class="token function">vi</span> source/categories/index.md<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>把内容改成：</p>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token front-matter-block"><span class="token punctuation">---</span>
+<span class="token front-matter yaml language-yaml"><span class="token key atrule">title</span><span class="token punctuation">:</span> categories
+<span class="token key atrule">date</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-28 12:00:00</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> <span class="token string">"categories"</span>
+<span class="token key atrule">layout</span><span class="token punctuation">:</span> <span class="token string">"categories"</span></span>
+<span class="token punctuation">---</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="创建标签页"><a href="#创建标签页" class="headerlink" title="创建标签页"></a>创建标签页</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo new page <span class="token string">"tags"</span>
+<span class="token function">vi</span> source/tags/index.md<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>改成：</p>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token front-matter-block"><span class="token punctuation">---</span>
+<span class="token front-matter yaml language-yaml"><span class="token key atrule">title</span><span class="token punctuation">:</span> tags
+<span class="token key atrule">date</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-28 12:00:00</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> <span class="token string">"tags"</span>
+<span class="token key atrule">layout</span><span class="token punctuation">:</span> <span class="token string">"tags"</span></span>
+<span class="token punctuation">---</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="创建关于页"><a href="#创建关于页" class="headerlink" title="创建关于页"></a>创建关于页</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo new page <span class="token string">"about"</span>
+<span class="token function">vi</span> source/about/index.md<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>改成：</p>
+<pre class="line-numbers language-none"><code class="language-none">---
+title: about
+date: 2026-03-28 12:00:00
+type: &quot;about&quot;
+layout: &quot;about&quot;
+---<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这三页是<strong>必须先补</strong>；不然主题菜单和页面结构会不完整。README 是这样要求的。</p>
+<hr>
+<h2 id="5-可选页面：联系页和友链页"><a href="#5-可选页面：联系页和友链页" class="headerlink" title="5. 可选页面：联系页和友链页"></a>5. 可选页面：联系页和友链页</h2><p>如果暂时不需要，可以先不建。</p>
+<h3 id="联系页"><a href="#联系页" class="headerlink" title="联系页"></a>联系页</h3><p>README 给出的 front-matter 是：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo new page <span class="token string">"contact"</span>
+<span class="token function">vi</span> source/contact/index.md<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>填：</p>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token front-matter-block"><span class="token punctuation">---</span>
+<span class="token front-matter yaml language-yaml"><span class="token key atrule">title</span><span class="token punctuation">:</span> contact
+<span class="token key atrule">date</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-28 12:00:00</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> <span class="token string">"contact"</span>
+<span class="token key atrule">layout</span><span class="token punctuation">:</span> <span class="token string">"contact"</span></span>
+<span class="token punctuation">---</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="友链页"><a href="#友链页" class="headerlink" title="友链页"></a>友链页</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo new page <span class="token string">"friends"</span>
+<span class="token function">vi</span> source/friends/index.md<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>最少写成：</p>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token front-matter-block"><span class="token punctuation">---</span>
+<span class="token front-matter yaml language-yaml"><span class="token key atrule">title</span><span class="token punctuation">:</span> friends
+<span class="token key atrule">date</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-28 12:00:00</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> <span class="token string">"friends"</span>
+<span class="token key atrule">layout</span><span class="token punctuation">:</span> <span class="token string">"friends"</span></span>
+<span class="token punctuation">---</span></span>
+
+[
+  &#123;
+    "avatar": "https://github.githubassets.com/favicons/favicon.png",
+    "name": "GitHub",
+    "introduction": "Code hosting platform",
+    "url": "https://github.com/",
+    "title": "Visit"
+  &#125;
+]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>主题 README 里给了 <code>friends</code> 页的 JSON 结构示例。</p>
+<h2 id="6-主题配置文件要改哪一个"><a href="#6-主题配置文件要改哪一个" class="headerlink" title="6. 主题配置文件要改哪一个"></a>6. 主题配置文件要改哪一个</h2><p>接下来你要开始改的是：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">~/ninja/themes/hexo-theme-matery/_config.yml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>不是站点根目录的 <code>_config.yml</code>。</p>
+<p>打开：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">vi</span> ~/ninja/themes/hexo-theme-matery/_config.yml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>你最先应该改的几项通常是：</p>
+<ul>
+<li>顶部菜单</li>
+<li>社交链接</li>
+<li>头像</li>
+<li>about 页面个人信息</li>
+<li>首页 banner &#x2F; 轮播</li>
+<li>是否开启樱花、点击爱心等效果</li>
+</ul>
+<p>这个主题自己的 <code>_config.yml</code> 里有大量配置项，比如：</p>
+<ul>
+<li><code>profile.avatar</code></li>
+<li><code>profile.career</code></li>
+<li><code>profile.introduction</code></li>
+<li><code>myProjects</code></li>
+<li><code>clicklove.enable</code></li>
+<li><code>sakura.enable</code></li>
+<li><code>mouseStar.enable</code></li>
+<li><code>snowdown.enable</code><br> 这些都在主题配置里。</li>
+</ul>
+<h3 id="7-最建议先改这三块"><a href="#7-最建议先改这三块" class="headerlink" title="7. 最建议先改这三块"></a>7. 最建议先改这三块</h3><h3 id="1）关于页个人信息"><a href="#1）关于页个人信息" class="headerlink" title="1）关于页个人信息"></a>1）关于页个人信息</h3><p>在主题 <code>_config.yml</code> 里，把：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">profile</span><span class="token punctuation">:</span>
+  <span class="token key atrule">avatar</span><span class="token punctuation">:</span> /medias/avatar.jpg
+  <span class="token key atrule">career</span><span class="token punctuation">:</span> Software Engineer
+  <span class="token key atrule">introduction</span><span class="token punctuation">:</span> <span class="token punctuation">...</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>改成你自己的内容。这个字段就是 about 页的个人资料区。</p>
+<h3 id="2）我的项目"><a href="#2）我的项目" class="headerlink" title="2）我的项目"></a>2）我的项目</h3><p><code>myProjects</code> 默认带的是主题作者自己的项目。你如果不改，站上会显示别人的内容。主题配置文件里这个模块默认是启用的。</p>
+<p>你有两种处理方式：</p>
+<p>要么关掉：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">myProjects</span><span class="token punctuation">:</span>
+  <span class="token key atrule">enable</span><span class="token punctuation">:</span> <span class="token boolean important">false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>要么换成你自己的项目内容。</p>
+<h3 id="3）页面特效"><a href="#3）页面特效" class="headerlink" title="3）页面特效"></a>3）页面特效</h3><p><code>clicklove.enable</code> 默认是 <code>true</code>，<code>sakura</code>、<code>mouseStar</code>、<code>snowdown</code> 默认是 <code>false</code>。如果你不喜欢点击冒爱心，直接关掉。</p>
+<p>比如：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">clicklove</span><span class="token punctuation">:</span>
+  <span class="token key atrule">enable</span><span class="token punctuation">:</span> <span class="token boolean important">false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="8-可选插件：字数统计"><a href="#8-可选插件：字数统计" class="headerlink" title="8. 可选插件：字数统计"></a>8. 可选插件：字数统计</h2><p>主题配置里明确写了，如果你要开文章字数、阅读时长、总字数统计，需要先安装 <code>hexo-wordcount</code>，对应配置在 <code>postInfo</code>。</p>
+<p>如果你想开，就执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/ninja
+<span class="token function">npm</span> i <span class="token parameter variable">--save</span> hexo-wordcount<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>然后在主题 <code>_config.yml</code> 里把：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">postInfo</span><span class="token punctuation">:</span>
+  <span class="token key atrule">wordCount</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">totalCount</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">min2read</span><span class="token punctuation">:</span> <span class="token boolean important">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果你暂时不需要，就保持默认 <code>false</code>。</p>
+<hr>
+<h2 id="9-可选：数学公式"><a href="#9-可选：数学公式" class="headerlink" title="9. 可选：数学公式"></a>9. 可选：数学公式</h2><p>如果你以后写数学公式，这个主题支持 <code>MathJax</code>，但要两步：</p>
+<ol>
+<li>在主题配置里把 <code>mathjax.enable</code> 打开</li>
+<li>在需要公式的文章 front-matter 里再加 <code>mathjax: true</code></li>
+</ol>
+<p>这是主题配置文件里明确写的。</p>
+<p>所以如果你暂时不写公式，先不用动。</p>
+<hr>
+<h2 id="10-头像和图片资源"><a href="#10-头像和图片资源" class="headerlink" title="10. 头像和图片资源"></a>10. 头像和图片资源</h2><p>这个主题默认会读 <code>/medias/avatar.jpg</code> 这类资源路径。主题配置里 <code>profile.avatar</code> 的默认值就是 <code>/medias/avatar.jpg</code>。读取的是这个文件夹下的文件<code>ninja/themes/hexo-theme-matery/source/medias</code>。用新的图片覆盖即可。</p>
+<h2 id="11-重新生成，检查有没有报错"><a href="#11-重新生成，检查有没有报错" class="headerlink" title="11. 重新生成，检查有没有报错"></a>11. 重新生成，检查有没有报错</h2><p>改完后执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/ninja
+hexo clean
+hexo g<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>如果这一步报错，先不要部署，先修。</p>
+<p>如果没报错，再部署：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo d<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>此时会 push 不上去，说是检测到了密钥，此时打开报错信息中的那个链接，然后选择<strong>“It’s a false positive”</strong>提交，然后再进行部署即可。</p>
+<hr>
+<h2 id="12-推送源码"><a href="#12-推送源码" class="headerlink" title="12. 推送源码"></a>12. 推送源码</h2><p>保存源码之前，先把 <code>themes/hexo-theme-matery</code> 从“嵌套 Git 仓库”变成“普通目录”，不然上传到Github时，外层 <code>ninja-source</code> 仓库就会把它当成一个独立仓库引用，不是普通目录内容，这样的话，在这个主题目录中做的文件修改将不会被备份。</p>
+<p>方案：删除主题目录里的 <code>.git</code></p>
+<p>在 AutoDL 上执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/ninja/themes/hexo-theme-matery
+<span class="token function">rm</span> <span class="token parameter variable">-rf</span> .git<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>这一步的意思是：</p>
+<ul>
+<li>不再把 <code>hexo-theme-matery</code> 当成独立仓库</li>
+<li>让它变成你源码仓库里的普通文件夹</li>
+</ul>
+<p>然后回到项目根目录重新提交：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/ninja
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"convert matery theme to regular folder"</span>
+<span class="token function">git</span> push<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这样推上去后，GitHub 里这个目录就会变成普通文件夹，可以正常点进去。</p>
+<p>如果还是不行，就执行下面：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/ninja
+<span class="token function">git</span> <span class="token function">rm</span> <span class="token parameter variable">--cached</span> themes/hexo-theme-matery
+<span class="token function">rm</span> <span class="token parameter variable">-rf</span> .git/modules/themes/hexo-theme-matery
+<span class="token function">git</span> <span class="token function">add</span> themes/hexo-theme-matery
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"fix matery theme from gitlink to normal directory"</span>
+<span class="token function">git</span> push<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="13-先保存源码，再部署更稳"><a href="#13-先保存源码，再部署更稳" class="headerlink" title="13. 先保存源码，再部署更稳"></a>13. 先保存源码，再部署更稳</h2><p>你已经有源码私有仓库的话，我建议顺序是：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/ninja
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"switch to matery theme"</span>
+<span class="token function">git</span> push
+
+hexo clean <span class="token operator">&amp;&amp;</span> hexo g <span class="token operator">&amp;&amp;</span> hexo d<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这样你的源码改动先有备份，再发站点。</p>
+<p>hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Ninja04</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://ninjalog27.github.io/2026/03/28/%E4%B8%AA%E4%BA%BA%E7%AB%99%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/">https://ninjalog27.github.io/2026/03/28/%E4%B8%AA%E4%BA%BA%E7%AB%99%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Ninja04</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Hexo/">
+                                    <span class="chip bg-color">Hexo</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%8D%9A%E5%AE%A2/">
+                                    <span class="chip bg-color">博客</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2026/03/28/%E4%B8%AA%E4%BA%BA%E7%AB%99%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="个人站搭建流程">
+                        
+                        <span class="card-title">个人站搭建流程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Hexo/">
+                        <span class="chip bg-color">Hexo</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8D%9A%E5%AE%A2/">
+                        <span class="chip bg-color">博客</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/03/28/hello-world/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Hello World">
+                        
+                        <span class="card-title">Hello World</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Ninja04
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('1'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2026</span>
+            
+            <a href="/about" target="_blank">Ninja04</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">2.9k</span>
+            
+            
+            
+            
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:3399521605@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=3399521605" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 3399521605" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

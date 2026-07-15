@@ -9,3 +9,24 @@
   border-radius: 50%;
   object-fit: contain;
 }
+
+#page-header.not-home-page::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(10, 18, 30, 0.42), rgba(10, 18, 30, 0.58));
+}
+
+#page-header.not-home-page #nav,
+#page-header.not-home-page #page-site-info {
+  z-index: 2;
+}
+
+#page-header.not-home-page #site-title,
+#page-header.not-home-page #nav,
+#page-header.not-home-page #nav a {
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}

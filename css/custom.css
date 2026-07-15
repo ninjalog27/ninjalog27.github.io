@@ -15,6 +15,70 @@
   display: none;
 }
 
+/* Keep the compact console trigger visually stable when the menu opens. */
+#center-console + label.console-toggle,
+#center-console:checked + label.console-toggle {
+  --console-icon-size: 22px;
+  position: relative;
+  top: 0;
+  right: 0;
+  z-index: 31;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  margin-left: 1rem;
+  color: var(--font-color);
+  background: transparent;
+  border-radius: 50%;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+#center-console + label.console-toggle:hover,
+#center-console:checked + label.console-toggle {
+  background: transparent;
+}
+
+#page-header.not-home-page:not(.nav-fixed) #center-console + label.console-toggle,
+#page-header.not-home-page:not(.nav-fixed) #center-console:checked + label.console-toggle {
+  color: var(--anzhiyu-white);
+}
+
+#center-console + label.console-toggle::after,
+#center-console:checked + label.console-toggle::after {
+  display: none;
+}
+
+#center-console + label.console-toggle i,
+#center-console:checked + label.console-toggle i,
+[data-theme="dark"] #center-console:checked + label.console-toggle i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(var(--console-icon-size) / 3) !important;
+  height: 4px !important;
+  margin: auto;
+  color: inherit;
+  background: currentColor !important;
+  border-radius: 2px;
+  opacity: 1;
+  transform: translateY(calc(var(--console-icon-size) / 4)) !important;
+  transition: width 0.2s ease, opacity 0.2s ease;
+}
+
+#center-console + label.console-toggle i.left,
+#center-console:checked + label.console-toggle i.left {
+  width: var(--console-icon-size) !important;
+  transform: translateY(calc(var(--console-icon-size) / -4)) !important;
+}
+
+#center-console + label.console-toggle i.right,
+#center-console:checked + label.console-toggle i.right {
+  right: 0;
+  left: auto;
+  width: calc(var(--console-icon-size) / 2) !important;
+}
+
 /* Replace the full-screen console with a compact navigation dropdown. */
 #console {
   position: fixed;

@@ -1,0 +1,831 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>DreamZero 官方 DROID 仿真教程：从空机器到生成视频 | Ninja</title><meta name="keywords" content="DreamZero,DROID,Isaac Lab,机器人仿真,世界模型,教程"><meta name="author" content="Ninja04"><meta name="copyright" content="Ninja04"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="DreamZero 官方 DROID 仿真教程：从空机器到生成视频"><meta name="application-name" content="DreamZero 官方 DROID 仿真教程：从空机器到生成视频"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="DreamZero 官方 DROID 仿真教程：从空机器到生成视频"><meta property="og:url" content="https://ninjalog27.github.io/2026/07/16/dreamzero-official-droid-sim-tutorial/index.html"><meta property="og:site_name" content="Ninja"><meta property="og:description" content="使用官方 DreamZero-DROID 14B 权重与 DROID Isaac Lab 环境，从两台空机器完成分布式推理、仿真评测和视频产物验证。"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://ninjalog27.github.io/img/site/covers/0.jpg"><meta property="article:author" content="Ninja04"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://ninjalog27.github.io/img/site/covers/0.jpg"><meta name="description" content="使用官方 DreamZero-DROID 14B 权重与 DROID Isaac Lab 环境，从两台空机器完成分布式推理、仿真评测和视频产物验证。"><link rel="shortcut icon" href="/img/site/logo.png"><link rel="canonical" href="https://ninjalog27.github.io/2026/07/16/dreamzero-official-droid-sim-tutorial/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: undefined,
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Ninja04","link":"链接: ","source":"来源: Ninja","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Ninja',
+  title: 'DreamZero 官方 DROID 仿真教程：从空机器到生成视频',
+  postAI: '',
+  pageFillDescription: 'DreamZero 官方 DROID 仿真：从空机器到生成视频, 1. 完成后你会得到什么, 2. 本教程使用的机器, 模型机 A, 仿真机 B, 网络要求, 3. 固定代码版本, 4. 模型机 A：安装 DreamZero, 4.1 检查 GPU 和磁盘, 4.2 安装系统工具, 4.3 安装 Miniconda, 4.4 克隆 DreamZero, 4.5 创建 Python 环境, 4.6 验证 Python、Torch 和 GPU, 5. 模型机 A：下载 DreamZero-DROID 权重, 5.1 下载不含 TensorRT 的 PyTorch 权重, 5.2 验证权重完整性, 6. 仿真机 B：安装 DROID Isaac Lab 环境, 6.1 检查 GPU 和磁盘, 6.2 安装系统工具, 6.3 克隆 DreamZero, 6.4 克隆并安装 sim-evals, 6.5 下载 DROID 仿真资产, 7. 启动顺序, 7.1 模型机 A：启动 DreamZero 服务, 7.2 模型机 A：检查端口和显存, 7.3 仿真机 B：检查网络, 8. 仿真机 B：先跑 Scene 1, 8.1 Scene 1 完成后找视频, 8.2 在模型机查预测视频, 9. 依次运行 Scene 2 和 Scene 3, 9.1 Scene 2, 9.2 Scene 3, 10. 如何判断跑通和任务成功, 跑通, 任务成功, 11. 停止服务, 12. 常见故障, 13. 最终检查清单, 14. 上游资料官方仿真从空机器到生成视频这是一条单一路线教程使用官方权重启动策略服务再用官方引用的环境运行仿真本文不包含训练真机部署或优化核对日期完成后你会得到什么完成本文后两台机器的关系如下仿真机模型机仿真环境路相机机器人状态分布式推理维动作块保存实际视频保存模型预测的未来视频最终会生成两类视频视频在哪台机器保存位置内容仿真实际仿真机仿真执行过程画面为右外部相机腕部相机左外部相机横向拼接预测视频模型机模型内部生成的未来视频预测不是仿真实际运动轨迹仿真视频在一个完成后写入模型预测视频通常在或客户端断开时写入本教程使用的机器模型机项目配置操作系统位于同一节点核以上内存以上磁盘以上可用网络与仿真机处于同一内网本文示例明确要求至少张并声明测试过与本文使用的路线仿真机项目配置操作系统或核以上内存以上磁盘以上可用网络能访问模型机本文示例没有公开最低规格这里选用级是为了给相机渲染和缓存留出余量这属于保守工程配置不是官方最低要求网络要求模型服务会监听只允许仿真机访问该端口不要把未认证的服务直接暴露到公网本文中的两个示例必须替换成你机器的真实内网固定代码版本本文按以下版本编写仓库两台机器都需要源码但只有模型机需要下载权重模型机安装以下命令全部在模型机的终端中执行检查和磁盘你应该看到两张应显示两张卡位于同一节点并有高速互联安装系统工具安装如果模型机已经有可用的可跳过本节重新打开终端后确认克隆预期输出完整没有输出创建环境基线不需要安装中标注为专用的和组件验证和至少应满足如果这里失败不要继续下载权重先修复驱动或编译问题模型机下载权重继续在模型机的终端执行下载不含的权重如果要求令牌你的不要把写入文档历史共享文件或仓库验证权重完整性预期个模型分片合计约不要用页面显示的历史代替本地实际大小仿真机安装环境以下命令全部在仿真机的终端执行模型环境使用而固定并将指向两套环境不要混装检查和磁盘安装系统工具克隆仿真机需要中的适配脚本但不需要下载模型权重克隆并安装验证环境应为的依赖配置会安装下载仿真资产启动顺序这一节必须按顺序执行先启动模型服务再启动仿真模型机启动服务在模型机的终端执行这条命令会一直占用终端属于正常现象不要按首次加载和前几次推理可能需要数分钟服务就绪时应看到类似信息如果模型尚未完成加载仿真机不要开始评测模型机检查端口和显存另开模型机的终端预期端口正在监听两张都有模型显存占用仿真机检查网络在仿真机的终端执行把替换成真实模型机预期如果失败检查模型服务是否已就绪以及模型机防火墙或云安全组是否允许仿真机访问仿真机先跑仍在仿真机的终端执行脚本会自动启动加载场景并连接服务仿真侧不需要再启动另一个后台服务的语言指令已经写在脚本中用户不需要另行输入会自动选择该指令和对应场景第一次启动可能需要较长时间初始化扩展和资产模型机应出现客户端连接和推理日志完成后找视频仿真脚本结束后在仿真机执行最新文件类似它是的仿真实际画面从左到右依次为右外部相机腕部相机左外部相机在有桌面环境的机器上可播放远程服务器没有桌面时将下载到本地查看在模型机查预测视频在模型机的终端执行文件类似这是模型预测的未来视频帧率为它用于观察的世界预测不应当作实际仿真成功录像同一目录下的保存发送给模型的观测帧可用于排查相机顺序和输入内容依次运行和保持模型机的服务不停止在仿真机执行对应指令对应指令每次运行都会创建新的时间戳目录三个场景完成后检查应该至少看到三个新如何判断跑通和任务成功跑通满足以下条件可认定技术链路跑通模型服务成功加载两张并监听端口仿真机可以建立连接模型返回二维动作块最后一维为即个关节位置加个夹爪动作能持续执行动作直到结束仿真机生成可播放的模型机生成预测视频或至少保存输入观测任务成功进程正常退出只表示链路跑通不代表机器人完成任务当前没有输出一个标准化的三场景成功率汇总因此需要查看视频并记录场景成功条件方块最终进入碗中罐子最终进入杯子中香蕉最终进入箱子中建议为每个场景至少运行个人工或另外编写统计脚本计算成功率本文的一条龙验收只要求每个场景先完成个停止服务所有场景运行完成后回到模型机的终端按随后确认端口已释放无输出表示服务已停止常见故障现象优先检查模型机没有监听是否仍在加载模型两个是否都正常是否出现仿真机连接失败是否正确模型机防火墙安全组服务是否监听小于容器映射调度系统实际分配的数编译失败是否先安装和编译器是否可见尝试重新安装启动失败仿真机是否使用驱动是否正常系统库是否齐全失败是否激活是否在该仓库执行过动作维度断言失败是否使用是否为不要通过数组裁切掩盖错误仿真机没有是否真正结束当前工作目录是否为根目录检查磁盘空间模型机没有预测等待或客户端断开检查的日志查看是否已生成最终检查清单模型机有仿真机有两台机器使用同一内网但只向仿真机开放两台机器的均为为模型机存在个分片模型机的服务保持运行能看到端口和双卡显存占用仿真机可以通过连接模型机各生成至少一个仿真录像和模型预测视频已分开保存和解释已查看视频并单独记录链路跑通与任务是否成功上游资料权重仿真环境论文',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-07-16 15:37:27',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">站点</div><div class="back-menu-list"><a class="back-menu-item" href="/archives/" title="归档"><img class="back-menu-item-icon" src="/img/site/logo.png" alt="归档"/><span class="back-menu-item-text">归档</span></a><a class="back-menu-item" href="/categories/" title="分类"><img class="back-menu-item-icon" src="/img/site/logo.png" alt="分类"/><span class="back-menu-item-text">分类</span></a><a class="back-menu-item" href="/tags/" title="标签"><img class="back-menu-item-icon" src="/img/site/logo.png" alt="标签"/><span class="back-menu-item-text">标签</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">更多</div><div class="back-menu-list"><a class="back-menu-item" href="/about/" title="关于本站"><img class="back-menu-item-icon" src="/img/site/logo.png" alt="关于本站"/><span class="back-menu-item-text">关于本站</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">Ninja</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本站</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/DROID/" style="font-size: 1.05rem;">DROID<sup>1</sup></a><a href="/tags/DreamZero/" style="font-size: 1.05rem;">DreamZero<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Isaac-Lab/" style="font-size: 1.05rem;">Isaac Lab<sup>1</sup></a><a href="/tags/%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B/" style="font-size: 1.05rem;">世界模型<sup>1</sup></a><a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 1.05rem;">博客<sup>1</sup></a><a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 1.05rem;">教程<sup>1</sup></a><a href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BB%BF%E7%9C%9F/" style="font-size: 1.05rem;">机器人仿真<sup>1</sup></a><a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 1.05rem;">测试<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/07/"><span class="card-archive-list-date">七月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" itemprop="url">具身智能</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/DreamZero/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>DreamZero</span></a><a class="article-meta__tags" href="/tags/DROID/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>DROID</span></a><a class="article-meta__tags" href="/tags/Isaac-Lab/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Isaac Lab</span></a><a class="article-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BB%BF%E7%9C%9F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>机器人仿真</span></a><a class="article-meta__tags" href="/tags/%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>世界模型</span></a><a class="article-meta__tags" href="/tags/%E6%95%99%E7%A8%8B/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>教程</span></a></span></div></div><h1 class="post-title" itemprop="name headline">DreamZero 官方 DROID 仿真教程：从空机器到生成视频</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-07-16T07:30:00.000Z" title="发表于 2026-07-16 15:30:00">2026-07-16</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-07-16T07:37:27.603Z" title="更新于 2026-07-16 15:37:27">2026-07-16</time></span></div><div class="meta-secondline"></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/img/site/covers/0.jpg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://ninjalog27.github.io/2026/07/16/dreamzero-official-droid-sim-tutorial/"><header><a class="post-meta-categories" href="/categories/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" itemprop="url">具身智能</a><a href="/tags/DreamZero/" tabindex="-1" itemprop="url">DreamZero</a><a href="/tags/DROID/" tabindex="-1" itemprop="url">DROID</a><a href="/tags/Isaac-Lab/" tabindex="-1" itemprop="url">Isaac Lab</a><a href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BB%BF%E7%9C%9F/" tabindex="-1" itemprop="url">机器人仿真</a><a href="/tags/%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B/" tabindex="-1" itemprop="url">世界模型</a><a href="/tags/%E6%95%99%E7%A8%8B/" tabindex="-1" itemprop="url">教程</a><h1 id="CrawlerTitle" itemprop="name headline">DreamZero 官方 DROID 仿真教程：从空机器到生成视频</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Ninja04</span><time itemprop="dateCreated datePublished" datetime="2026-07-16T07:30:00.000Z" title="发表于 2026-07-16 15:30:00">2026-07-16</time><time itemprop="dateCreated datePublished" datetime="2026-07-16T07:37:27.603Z" title="更新于 2026-07-16 15:37:27">2026-07-16</time></header><h1 id="DreamZero-官方-DROID-仿真：从空机器到生成视频"><a href="#DreamZero-官方-DROID-仿真：从空机器到生成视频" class="headerlink" title="DreamZero 官方 DROID 仿真：从空机器到生成视频"></a>DreamZero 官方 DROID 仿真：从空机器到生成视频</h1><blockquote>
+<p>这是一条单一路线教程：使用官方 <code>DreamZero-DROID</code> 14B 权重启动策略服务，再用官方引用的 DROID Isaac Lab 环境运行仿真。<br>本文不包含训练、LIBERO、真机部署或 GB200 TensorRT 优化。<br>核对日期：2026-07-13。</p>
+</blockquote>
+<h2 id="1-完成后你会得到什么"><a href="#1-完成后你会得到什么" class="headerlink" title="1. 完成后你会得到什么"></a>1. 完成后你会得到什么</h2><p>完成本文后，两台机器的关系如下：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">仿真机 B（Isaac Lab）                       模型机 A（DreamZero）
+┌──────────────────────┐                 ┌─────────────────────────┐
+│ DROID 仿真环境        │  WebSocket      │ DreamZero-DROID 14B      │
+│ 3 路相机 + 机器人状态  │ ──────────────> │ 2×H100 分布式推理         │
+│                      │  8 维动作块       │                         │
+│ 保存实际 rollout 视频 │ &lt;────────────── │ 保存模型预测的未来视频     │
+└──────────────────────┘   TCP 5000      └─────────────────────────┘<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最终会生成两类视频：</p>
+<table>
+<thead>
+<tr>
+<th>视频</th>
+<th>在哪台机器</th>
+<th>保存位置</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>仿真实际 rollout</td>
+<td>仿真机 B</td>
+<td><code>/data/dreamzero/src/dreamzero/runs/YYYY-MM-DD/HH-MM-SS/episode_0.mp4</code></td>
+<td>仿真执行过程，画面为右外部相机、腕部相机、左外部相机横向拼接，15 FPS</td>
+</tr>
+<tr>
+<td>DreamZero 预测视频</td>
+<td>模型机 A</td>
+<td><code>/data/dreamzero/checkpoints/real_world_eval_gen_YYYYMMDD_0/DreamZero-DROID/*.mp4</code></td>
+<td>模型内部生成的未来视频预测，5 FPS；不是仿真实际运动轨迹</td>
+</tr>
+</tbody></table>
+<p>仿真视频在一个 episode 完成后写入。模型预测视频通常在 episode reset 或客户端断开时写入。</p>
+<h2 id="2-本教程使用的机器"><a href="#2-本教程使用的机器" class="headerlink" title="2. 本教程使用的机器"></a>2. 本教程使用的机器</h2><h3 id="模型机-A"><a href="#模型机-A" class="headerlink" title="模型机 A"></a>模型机 A</h3><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>配置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>操作系统</td>
+<td>Ubuntu 22.04 x86_64</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>2×NVIDIA H100 80GB，位于同一节点</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>32 核以上</td>
+</tr>
+<tr>
+<td>内存</td>
+<td>256GB 以上</td>
+</tr>
+<tr>
+<td>磁盘</td>
+<td>200GB 以上可用 NVMe</td>
+</tr>
+<tr>
+<td>网络</td>
+<td>与仿真机处于同一内网</td>
+</tr>
+<tr>
+<td>本文示例 IP</td>
+<td><code>10.0.0.10</code></td>
+</tr>
+</tbody></table>
+<p>DreamZero README 明确要求至少 2 张 GPU，并声明测试过 H100 与 GB200。本文使用 H100 的 PyTorch 路线。</p>
+<h3 id="仿真机-B"><a href="#仿真机-B" class="headerlink" title="仿真机 B"></a>仿真机 B</h3><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>配置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>操作系统</td>
+<td>Ubuntu 22.04 x86_64</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>1×NVIDIA L40S 48GB，或 RTX 6000 Ada 48GB</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>16 核以上</td>
+</tr>
+<tr>
+<td>内存</td>
+<td>64GB 以上</td>
+</tr>
+<tr>
+<td>磁盘</td>
+<td>120GB 以上可用 SSD</td>
+</tr>
+<tr>
+<td>网络</td>
+<td>能访问模型机 <code>10.0.0.10:5000</code></td>
+</tr>
+<tr>
+<td>本文示例 IP</td>
+<td><code>10.0.0.20</code></td>
+</tr>
+</tbody></table>
+<p><code>sim-evals</code> 没有公开最低 GPU 规格。这里选用 48GB RTX 级 GPU，是为了给 Isaac Sim、相机渲染和缓存留出余量；这属于保守工程配置，不是官方最低要求。</p>
+<h3 id="网络要求"><a href="#网络要求" class="headerlink" title="网络要求"></a>网络要求</h3><p>模型服务会监听 <code>0.0.0.0:5000</code>。只允许仿真机访问该端口，不要把未认证的 WebSocket 服务直接暴露到公网。</p>
+<p>本文中的两个示例 IP 必须替换成你机器的真实内网 IP。</p>
+<h2 id="3-固定代码版本"><a href="#3-固定代码版本" class="headerlink" title="3. 固定代码版本"></a>3. 固定代码版本</h2><p>本文按以下版本编写：</p>
+<table>
+<thead>
+<tr>
+<th>仓库</th>
+<th>Commit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/dreamzero0/dreamzero">https://github.com/dreamzero0/dreamzero</a></td>
+<td><code>ab790c198fbce33503358efbbd4187ce9a89adf3</code></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/arhanjain/sim-evals">https://github.com/arhanjain/sim-evals</a></td>
+<td><code>3a6b0e8177f696947f49c082728f10ef5133ede1</code></td>
+</tr>
+</tbody></table>
+<p>两台机器都需要 DreamZero 源码，但只有模型机需要下载 14B 权重。</p>
+<h2 id="4-模型机-A：安装-DreamZero"><a href="#4-模型机-A：安装-DreamZero" class="headerlink" title="4. 模型机 A：安装 DreamZero"></a>4. 模型机 A：安装 DreamZero</h2><p>以下命令全部在 <strong>模型机 A 的终端 A1</strong> 中执行。</p>
+<h3 id="4-1-检查-GPU-和磁盘"><a href="#4-1-检查-GPU-和磁盘" class="headerlink" title="4.1 检查 GPU 和磁盘"></a>4.1 检查 GPU 和磁盘</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nvidia-smi
+nvidia-smi <span class="token parameter variable">-L</span>
+nvidia-smi topo <span class="token parameter variable">-m</span>
+<span class="token function">df</span> <span class="token parameter variable">-h</span> /data<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>你应该看到两张 H100。<code>nvidia-smi topo -m</code> 应显示两张卡位于同一节点，并有高速互联。</p>
+<h3 id="4-2-安装系统工具"><a href="#4-2-安装系统工具" class="headerlink" title="4.2 安装系统工具"></a>4.2 安装系统工具</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> <span class="token punctuation">\</span>
+  <span class="token function">git</span> git-lfs <span class="token function">curl</span> <span class="token function">wget</span> build-essential ninja-build <span class="token punctuation">\</span>
+  ffmpeg libgl1 libglib2.0-0 netcat-openbsd
+
+<span class="token function">git</span> lfs <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="4-3-安装-Miniconda"><a href="#4-3-安装-Miniconda" class="headerlink" title="4.3 安装 Miniconda"></a>4.3 安装 Miniconda</h3><p>如果模型机已经有可用的 Conda，可跳过本节。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /tmp
+<span class="token function">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+<span class="token function">bash</span> Miniconda3-latest-Linux-x86_64.sh <span class="token parameter variable">-b</span> <span class="token parameter variable">-p</span> <span class="token string">"<span class="token environment constant">$HOME</span>/miniconda3"</span>
+<span class="token builtin class-name">source</span> <span class="token string">"<span class="token environment constant">$HOME</span>/miniconda3/etc/profile.d/conda.sh"</span>
+conda init <span class="token function">bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>重新打开终端后确认：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda <span class="token parameter variable">--version</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="4-4-克隆-DreamZero"><a href="#4-4-克隆-DreamZero" class="headerlink" title="4.4 克隆 DreamZero"></a>4.4 克隆 DreamZero</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /data/dreamzero/src /data/dreamzero/checkpoints
+<span class="token function">sudo</span> <span class="token function">chown</span> <span class="token parameter variable">-R</span> <span class="token string">"<span class="token environment constant">$USER</span>"</span><span class="token builtin class-name">:</span><span class="token string">"<span class="token environment constant">$USER</span>"</span> /data/dreamzero
+
+<span class="token builtin class-name">cd</span> /data/dreamzero/src
+<span class="token function">git</span> clone https://github.com/dreamzero0/dreamzero.git
+<span class="token builtin class-name">cd</span> dreamzero
+<span class="token function">git</span> checkout ab790c198fbce33503358efbbd4187ce9a89adf3
+
+<span class="token function">git</span> rev-parse HEAD
+<span class="token function">git</span> status <span class="token parameter variable">--short</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>预期：</p>
+<ul>
+<li><code>git rev-parse HEAD</code> 输出完整 commit <code>ab790c...</code>。</li>
+<li><code>git status --short</code> 没有输出。</li>
+</ul>
+<h3 id="4-5-创建-Python-环境"><a href="#4-5-创建-Python-环境" class="headerlink" title="4.5 创建 Python 环境"></a>4.5 创建 Python 环境</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">source</span> <span class="token string">"<span class="token environment constant">$HOME</span>/miniconda3/etc/profile.d/conda.sh"</span>
+conda create <span class="token parameter variable">-n</span> dreamzero <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.11</span> <span class="token parameter variable">-y</span>
+conda activate dreamzero
+
+python <span class="token parameter variable">-m</span> pip <span class="token function">install</span> <span class="token parameter variable">-U</span> pip setuptools wheel
+<span class="token builtin class-name">cd</span> /data/dreamzero/src/dreamzero
+pip <span class="token function">install</span> <span class="token parameter variable">-e</span> <span class="token builtin class-name">.</span> --extra-index-url https://download.pytorch.org/whl/cu129
+<span class="token assign-left variable">MAX_JOBS</span><span class="token operator">=</span><span class="token number">8</span> pip <span class="token function">install</span> --no-build-isolation flash-attn<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>H100 基线不需要安装 README 中标注为 GB200 专用的 Transformer Engine 和 TensorRT NVFP4 组件。</p>
+<h3 id="4-6-验证-Python、Torch-和-GPU"><a href="#4-6-验证-Python、Torch-和-GPU" class="headerlink" title="4.6 验证 Python、Torch 和 GPU"></a>4.6 验证 Python、Torch 和 GPU</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python - <span class="token operator">&lt;&lt;</span><span class="token string">'PY'
+import torch
+import flash_attn
+
+print("torch =", torch.__version__)
+print("torch CUDA =", torch.version.cuda)
+print("GPU count =", torch.cuda.device_count())
+print("BF16 supported =", torch.cuda.is_bf16_supported())
+for i in range(torch.cuda.device_count()):
+    print(i, torch.cuda.get_device_name(i))
+PY</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>至少应满足：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">GPU count = 2
+BF16 supported = True<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>如果这里失败，不要继续下载权重。先修复驱动、Torch CUDA wheel 或 FlashAttention 编译问题。</p>
+<h2 id="5-模型机-A：下载-DreamZero-DROID-权重"><a href="#5-模型机-A：下载-DreamZero-DROID-权重" class="headerlink" title="5. 模型机 A：下载 DreamZero-DROID 权重"></a>5. 模型机 A：下载 DreamZero-DROID 权重</h2><p>继续在 <strong>模型机 A 的终端 A1</strong> 执行。</p>
+<h3 id="5-1-下载不含-TensorRT-的-PyTorch-权重"><a href="#5-1-下载不含-TensorRT-的-PyTorch-权重" class="headerlink" title="5.1 下载不含 TensorRT 的 PyTorch 权重"></a>5.1 下载不含 TensorRT 的 PyTorch 权重</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda activate dreamzero
+pip <span class="token function">install</span> <span class="token parameter variable">-U</span> <span class="token string">"huggingface_hub[cli]"</span>
+
+hf download GEAR-Dreams/DreamZero-DROID <span class="token punctuation">\</span>
+  --repo-type model <span class="token punctuation">\</span>
+  --local-dir /data/dreamzero/checkpoints/DreamZero-DROID <span class="token punctuation">\</span>
+  <span class="token parameter variable">--exclude</span> <span class="token string">"tensorrt/**"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果 Hugging Face 要求令牌：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">HF_TOKEN</span><span class="token operator">=</span><span class="token string">'你的 Hugging Face Token'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>不要把 token 写入文档、Shell 历史共享文件或 Git 仓库。</p>
+<h3 id="5-2-验证权重完整性"><a href="#5-2-验证权重完整性" class="headerlink" title="5.2 验证权重完整性"></a>5.2 验证权重完整性</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /data/dreamzero/checkpoints/DreamZero-DROID
+
+<span class="token builtin class-name">test</span> <span class="token parameter variable">-f</span> config.json <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">echo</span> <span class="token string">"config.json OK"</span>
+<span class="token builtin class-name">test</span> <span class="token parameter variable">-f</span> model.safetensors.index.json <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">echo</span> <span class="token string">"index OK"</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"shard count: <span class="token variable"><span class="token variable">$(</span><span class="token function">find</span> <span class="token builtin class-name">.</span> <span class="token parameter variable">-maxdepth</span> <span class="token number">1</span> <span class="token parameter variable">-name</span> <span class="token string">'model-*.safetensors'</span> <span class="token operator">|</span> <span class="token function">wc</span> <span class="token parameter variable">-l</span><span class="token variable">)</span></span>"</span>
+<span class="token function">du</span> <span class="token parameter variable">-sh</span> <span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>预期：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">config.json OK
+index OK
+shard count: 10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>10 个 BF16 模型分片合计约 46GB。不要用 Hugging Face 页面显示的历史 <code>usedStorage</code> 代替本地实际大小。</p>
+<h2 id="6-仿真机-B：安装-DROID-Isaac-Lab-环境"><a href="#6-仿真机-B：安装-DROID-Isaac-Lab-环境" class="headerlink" title="6. 仿真机 B：安装 DROID Isaac Lab 环境"></a>6. 仿真机 B：安装 DROID Isaac Lab 环境</h2><p>以下命令全部在 <strong>仿真机 B 的终端 B1</strong> 执行。</p>
+<p>DreamZero 模型环境使用 PyTorch 2.8&#x2F;CUDA 12.9，而 <code>sim-evals</code> 固定 Isaac Lab 2.2.0，并将 Torch 指向 CUDA 11.8。两套环境不要混装。</p>
+<h3 id="6-1-检查-GPU-和磁盘"><a href="#6-1-检查-GPU-和磁盘" class="headerlink" title="6.1 检查 GPU 和磁盘"></a>6.1 检查 GPU 和磁盘</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nvidia-smi
+nvidia-smi <span class="token parameter variable">-L</span>
+<span class="token function">df</span> <span class="token parameter variable">-h</span> /data<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="6-2-安装系统工具"><a href="#6-2-安装系统工具" class="headerlink" title="6.2 安装系统工具"></a>6.2 安装系统工具</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> <span class="token punctuation">\</span>
+  <span class="token function">git</span> git-lfs <span class="token function">curl</span> build-essential ffmpeg netcat-openbsd <span class="token punctuation">\</span>
+  libgl1 libegl1 libglib2.0-0 libx11-6 libxrandr2 <span class="token punctuation">\</span>
+  libxinerama1 libxcursor1 libxi6 libsm6
+
+<span class="token function">git</span> lfs <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="6-3-克隆-DreamZero"><a href="#6-3-克隆-DreamZero" class="headerlink" title="6.3 克隆 DreamZero"></a>6.3 克隆 DreamZero</h3><p>仿真机需要 DreamZero 中的适配脚本，但不需要下载模型权重。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /data/dreamzero/src
+<span class="token function">sudo</span> <span class="token function">chown</span> <span class="token parameter variable">-R</span> <span class="token string">"<span class="token environment constant">$USER</span>"</span><span class="token builtin class-name">:</span><span class="token string">"<span class="token environment constant">$USER</span>"</span> /data/dreamzero
+
+<span class="token builtin class-name">cd</span> /data/dreamzero/src
+<span class="token function">git</span> clone https://github.com/dreamzero0/dreamzero.git
+<span class="token builtin class-name">cd</span> dreamzero
+<span class="token function">git</span> checkout ab790c198fbce33503358efbbd4187ce9a89adf3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="6-4-克隆并安装-sim-evals"><a href="#6-4-克隆并安装-sim-evals" class="headerlink" title="6.4 克隆并安装 sim-evals"></a>6.4 克隆并安装 <code>sim-evals</code></h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /data/dreamzero/src
+<span class="token function">git</span> clone https://github.com/arhanjain/sim-evals.git
+<span class="token builtin class-name">cd</span> sim-evals
+<span class="token function">git</span> checkout 3a6b0e8177f696947f49c082728f10ef5133ede1
+
+<span class="token function">curl</span> <span class="token parameter variable">-LsSf</span> https://astral.sh/uv/install.sh <span class="token operator">|</span> <span class="token function">sh</span>
+<span class="token builtin class-name">source</span> <span class="token string">"<span class="token environment constant">$HOME</span>/.local/bin/env"</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null <span class="token operator">||</span> <span class="token boolean">true</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$HOME</span>/.local/bin:<span class="token environment constant">$PATH</span>"</span>
+
+uv <span class="token function">sync</span>
+<span class="token builtin class-name">source</span> .venv/bin/activate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>验证环境：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">which</span> python
+python <span class="token parameter variable">--version</span>
+python <span class="token parameter variable">-c</span> <span class="token string">"import torch; print(torch.__version__, torch.version.cuda)"</span>
+python <span class="token parameter variable">-c</span> <span class="token string">"import sim_evals; print(sim_evals.__file__)"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Python 应为 3.11。<code>sim-evals</code> 的依赖配置会安装 <code>isaaclab[all,isaacsim]==2.2.0</code>。</p>
+<h3 id="6-5-下载-DROID-仿真资产"><a href="#6-5-下载-DROID-仿真资产" class="headerlink" title="6.5 下载 DROID 仿真资产"></a>6.5 下载 DROID 仿真资产</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /data/dreamzero/src/sim-evals
+<span class="token builtin class-name">source</span> .venv/bin/activate
+
+uvx hf download owhan/DROID-sim-environments <span class="token punctuation">\</span>
+  --repo-type dataset <span class="token punctuation">\</span>
+  --local-dir assets
+
+<span class="token function">du</span> <span class="token parameter variable">-sh</span> assets<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="7-启动顺序"><a href="#7-启动顺序" class="headerlink" title="7. 启动顺序"></a>7. 启动顺序</h2><p>这一节必须按顺序执行。先启动模型服务，再启动仿真。</p>
+<h3 id="7-1-模型机-A：启动-DreamZero-服务"><a href="#7-1-模型机-A：启动-DreamZero-服务" class="headerlink" title="7.1 模型机 A：启动 DreamZero 服务"></a>7.1 模型机 A：启动 DreamZero 服务</h3><p>在 <strong>模型机 A 的终端 A1</strong> 执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">source</span> <span class="token string">"<span class="token environment constant">$HOME</span>/miniconda3/etc/profile.d/conda.sh"</span>
+conda activate dreamzero
+<span class="token builtin class-name">cd</span> /data/dreamzero/src/dreamzero
+
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">CUDA_VISIBLE_DEVICES</span><span class="token operator">=</span><span class="token number">0,1</span>
+
+python <span class="token parameter variable">-m</span> torch.distributed.run <span class="token punctuation">\</span>
+  <span class="token parameter variable">--standalone</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--nproc_per_node</span><span class="token operator">=</span><span class="token number">2</span> <span class="token punctuation">\</span>
+  socket_test_optimized_AR.py <span class="token punctuation">\</span>
+  <span class="token parameter variable">--port</span> <span class="token number">5000</span> <span class="token punctuation">\</span>
+  --enable-dit-cache <span class="token punctuation">\</span>
+  --model-path /data/dreamzero/checkpoints/DreamZero-DROID<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这条命令会一直占用终端，属于正常现象。不要按 <code>Ctrl+C</code>。</p>
+<p>首次加载和前几次推理可能需要数分钟。服务就绪时，应看到类似信息：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Videos will be saved to: /data/dreamzero/checkpoints/real_world_eval_gen_YYYYMMDD_0/DreamZero-DROID
+Using roboarena policy server interface
+server listening on 0.0.0.0:5000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>如果模型尚未完成加载，仿真机不要开始评测。</p>
+<h3 id="7-2-模型机-A：检查端口和显存"><a href="#7-2-模型机-A：检查端口和显存" class="headerlink" title="7.2 模型机 A：检查端口和显存"></a>7.2 模型机 A：检查端口和显存</h3><p>另开 <strong>模型机 A 的终端 A2</strong>：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ss <span class="token parameter variable">-lntp</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token number">5000</span>
+nvidia-smi<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>预期端口 <code>5000</code> 正在监听，两张 H100 都有模型显存占用。</p>
+<h3 id="7-3-仿真机-B：检查网络"><a href="#7-3-仿真机-B：检查网络" class="headerlink" title="7.3 仿真机 B：检查网络"></a>7.3 仿真机 B：检查网络</h3><p>在 <strong>仿真机 B 的终端 B1</strong> 执行。把 <code>10.0.0.10</code> 替换成真实模型机 IP。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">MODEL_IP</span><span class="token operator">=</span><span class="token number">10.0</span>.0.10
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MODEL_PORT</span><span class="token operator">=</span><span class="token number">5000</span>
+
+<span class="token function">ping</span> <span class="token parameter variable">-c</span> <span class="token number">2</span> <span class="token string">"<span class="token variable">$MODEL_IP</span>"</span>
+<span class="token function">nc</span> <span class="token parameter variable">-vz</span> <span class="token string">"<span class="token variable">$MODEL_IP</span>"</span> <span class="token string">"<span class="token variable">$MODEL_PORT</span>"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>预期：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Connection to 10.0.0.10 5000 port [tcp/*] succeeded!<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果失败，检查模型服务是否已就绪，以及模型机防火墙或云安全组是否允许仿真机 IP 访问 TCP 5000。</p>
+<h2 id="8-仿真机-B：先跑-Scene-1"><a href="#8-仿真机-B：先跑-Scene-1" class="headerlink" title="8. 仿真机 B：先跑 Scene 1"></a>8. 仿真机 B：先跑 Scene 1</h2><p>仍在 <strong>仿真机 B 的终端 B1</strong> 执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /data/dreamzero/src/sim-evals
+<span class="token builtin class-name">source</span> .venv/bin/activate
+
+<span class="token builtin class-name">cd</span> /data/dreamzero/src/dreamzero
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">CUDA_VISIBLE_DEVICES</span><span class="token operator">=</span><span class="token number">0</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MODEL_IP</span><span class="token operator">=</span><span class="token number">10.0</span>.0.10
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MODEL_PORT</span><span class="token operator">=</span><span class="token number">5000</span>
+
+python eval_utils/run_sim_eval.py <span class="token punctuation">\</span>
+  <span class="token parameter variable">--episodes</span> <span class="token number">1</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--scene</span> <span class="token number">1</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--host</span> <span class="token string">"<span class="token variable">$MODEL_IP</span>"</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--port</span> <span class="token string">"<span class="token variable">$MODEL_PORT</span>"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>脚本会自动启动 Isaac Sim、加载场景并连接 DreamZero 服务。仿真侧不需要再启动另一个后台服务。</p>
+<p>Scene 1 的语言指令已经写在脚本中：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">put the cube in the bowl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>用户不需要另行输入 prompt；<code>--scene 1</code> 会自动选择该指令和对应场景。</p>
+<p>第一次启动 Isaac Sim 可能需要较长时间初始化扩展、shader cache 和资产。模型机 A1 应出现客户端连接和推理日志。</p>
+<h3 id="8-1-Scene-1-完成后找视频"><a href="#8-1-Scene-1-完成后找视频" class="headerlink" title="8.1 Scene 1 完成后找视频"></a>8.1 Scene 1 完成后找视频</h3><p>仿真脚本结束后，在仿真机执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /data/dreamzero/src/dreamzero
+<span class="token function">find</span> runs <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> <span class="token string">'episode_*.mp4'</span> <span class="token parameter variable">-printf</span> <span class="token string">'%TY-%Tm-%Td %TH:%TM %p\n'</span> <span class="token operator">|</span> <span class="token function">sort</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>最新文件类似：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">runs/2026-07-13/15-30-42/episode_0.mp4<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>它是 15 FPS 的仿真实际 rollout，画面从左到右依次为：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">右外部相机 | 腕部相机 | 左外部相机<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在有桌面环境的机器上可播放：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ffplay runs/2026-07-13/15-30-42/episode_0.mp4<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>远程服务器没有桌面时，将 MP4 下载到本地查看。</p>
+<h3 id="8-2-在模型机查预测视频"><a href="#8-2-在模型机查预测视频" class="headerlink" title="8.2 在模型机查预测视频"></a>8.2 在模型机查预测视频</h3><p>在 <strong>模型机 A 的终端 A2</strong> 执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">find</span> /data/dreamzero/checkpoints <span class="token punctuation">\</span>
+  <span class="token parameter variable">-path</span> <span class="token string">'*/real_world_eval_gen_*/*/*.mp4'</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">-printf</span> <span class="token string">'%TY-%Tm-%Td %TH:%TM %p\n'</span> <span class="token operator">|</span> <span class="token function">sort</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>文件类似：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">/data/dreamzero/checkpoints/
+└── real_world_eval_gen_20260713_0/
+    └── DreamZero-DROID/
+        └── 000000_07_13_15_31_09_n4.mp4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这是模型预测的未来视频，帧率为 5 FPS。它用于观察 DreamZero 的世界预测，不应当作实际仿真成功录像。</p>
+<p>同一目录下的 <code>inputs/</code> 保存发送给模型的观测帧，可用于排查相机顺序和输入内容。</p>
+<h2 id="9-依次运行-Scene-2-和-Scene-3"><a href="#9-依次运行-Scene-2-和-Scene-3" class="headerlink" title="9. 依次运行 Scene 2 和 Scene 3"></a>9. 依次运行 Scene 2 和 Scene 3</h2><p>保持模型机 A1 的 DreamZero 服务不停止。</p>
+<h3 id="9-1-Scene-2"><a href="#9-1-Scene-2" class="headerlink" title="9.1 Scene 2"></a>9.1 Scene 2</h3><p>在仿真机 B1 执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /data/dreamzero/src/sim-evals
+<span class="token builtin class-name">source</span> .venv/bin/activate
+<span class="token builtin class-name">cd</span> /data/dreamzero/src/dreamzero
+
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">CUDA_VISIBLE_DEVICES</span><span class="token operator">=</span><span class="token number">0</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MODEL_IP</span><span class="token operator">=</span><span class="token number">10.0</span>.0.10
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MODEL_PORT</span><span class="token operator">=</span><span class="token number">5000</span>
+
+python eval_utils/run_sim_eval.py <span class="token punctuation">\</span>
+  <span class="token parameter variable">--episodes</span> <span class="token number">1</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--scene</span> <span class="token number">2</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--host</span> <span class="token string">"<span class="token variable">$MODEL_IP</span>"</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--port</span> <span class="token string">"<span class="token variable">$MODEL_PORT</span>"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>对应指令：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">pick up the can and put it in the mug<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="9-2-Scene-3"><a href="#9-2-Scene-3" class="headerlink" title="9.2 Scene 3"></a>9.2 Scene 3</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python eval_utils/run_sim_eval.py <span class="token punctuation">\</span>
+  <span class="token parameter variable">--episodes</span> <span class="token number">1</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--scene</span> <span class="token number">3</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--host</span> <span class="token string">"<span class="token variable">$MODEL_IP</span>"</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--port</span> <span class="token string">"<span class="token variable">$MODEL_PORT</span>"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>对应指令：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">put the banana in the bin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>每次运行都会创建新的时间戳目录。三个场景完成后检查：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">find</span> /data/dreamzero/src/dreamzero/runs <span class="token punctuation">\</span>
+  <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> <span class="token string">'episode_0.mp4'</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">-printf</span> <span class="token string">'%TY-%Tm-%Td %TH:%TM %p\n'</span> <span class="token operator">|</span> <span class="token function">sort</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>应该至少看到三个新 MP4。</p>
+<h2 id="10-如何判断“跑通”和“任务成功”"><a href="#10-如何判断“跑通”和“任务成功”" class="headerlink" title="10. 如何判断“跑通”和“任务成功”"></a>10. 如何判断“跑通”和“任务成功”</h2><h3 id="跑通"><a href="#跑通" class="headerlink" title="跑通"></a>跑通</h3><p>满足以下条件可认定技术链路跑通：</p>
+<ul>
+<li>模型服务成功加载两张 H100，并监听 5000 端口。</li>
+<li>仿真机可以建立 WebSocket 连接。</li>
+<li>模型返回二维动作块，最后一维为 8，即 7 个关节位置加 1 个夹爪动作。</li>
+<li>Isaac Lab 能持续执行动作直到 episode 结束。</li>
+<li>仿真机生成可播放的 <code>episode_0.mp4</code>。</li>
+<li>模型机生成预测视频或至少保存输入观测。</li>
+</ul>
+<h3 id="任务成功"><a href="#任务成功" class="headerlink" title="任务成功"></a>任务成功</h3><p>进程正常退出只表示链路跑通，不代表机器人完成任务。当前 <code>run_sim_eval.py</code> 没有输出一个标准化的三场景成功率汇总，因此需要查看 rollout 视频，并记录：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>成功条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scene 1</td>
+<td>方块最终进入碗中</td>
+</tr>
+<tr>
+<td>Scene 2</td>
+<td>罐子最终进入杯子中</td>
+</tr>
+<tr>
+<td>Scene 3</td>
+<td>香蕉最终进入箱子中</td>
+</tr>
+</tbody></table>
+<p>建议为每个场景至少运行 10 个 episode，人工或另外编写统计脚本计算成功率。本文的一条龙验收只要求每个场景先完成 1 个 episode。</p>
+<h2 id="11-停止服务"><a href="#11-停止服务" class="headerlink" title="11. 停止服务"></a>11. 停止服务</h2><p>所有场景运行完成后，回到 <strong>模型机 A 的终端 A1</strong>，按：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Ctrl+C<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>随后确认端口已释放：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ss <span class="token parameter variable">-lntp</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token number">5000</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>无输出表示服务已停止。</p>
+<h2 id="12-常见故障"><a href="#12-常见故障" class="headerlink" title="12. 常见故障"></a>12. 常见故障</h2><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>优先检查</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>模型机没有监听 5000</td>
+<td>A1 是否仍在加载模型；两个 worker 是否都正常；是否出现 CUDA OOM</td>
+</tr>
+<tr>
+<td>仿真机 <code>nc</code> 连接失败</td>
+<td><code>MODEL_IP</code> 是否正确；模型机防火墙&#x2F;安全组；服务是否监听 <code>0.0.0.0:5000</code></td>
+</tr>
+<tr>
+<td><code>GPU count</code> 小于 2</td>
+<td><code>CUDA_VISIBLE_DEVICES</code>、容器 GPU 映射、调度系统实际分配的 GPU 数</td>
+</tr>
+<tr>
+<td><code>flash-attn</code> 编译失败</td>
+<td>Torch 是否先安装；<code>nvcc</code> 和编译器是否可见；尝试 <code>MAX_JOBS=2</code> 重新安装</td>
+</tr>
+<tr>
+<td>Isaac Sim 启动失败</td>
+<td>仿真机是否使用 RTX GPU；驱动是否正常；系统 OpenGL&#x2F;EGL 库是否齐全</td>
+</tr>
+<tr>
+<td><code>import sim_evals</code> 失败</td>
+<td>是否激活 <code>/data/dreamzero/src/sim-evals/.venv</code>；是否在该仓库执行过 <code>uv sync</code></td>
+</tr>
+<tr>
+<td>动作维度断言失败</td>
+<td>是否使用 DreamZero-DROID checkpoint；embodiment 是否为 DROID；不要通过数组裁切掩盖错误</td>
+</tr>
+<tr>
+<td>仿真机没有 MP4</td>
+<td>episode 是否真正结束；当前工作目录是否为 DreamZero 根目录；检查磁盘空间</td>
+</tr>
+<tr>
+<td>模型机没有预测 MP4</td>
+<td>等待 episode reset 或客户端断开；检查 A1 的 <code>Saved video on reset to:</code> 日志；查看 <code>inputs/</code> 是否已生成</td>
+</tr>
+</tbody></table>
+<h2 id="13-最终检查清单"><a href="#13-最终检查清单" class="headerlink" title="13. 最终检查清单"></a>13. 最终检查清单</h2><ul>
+<li><input disabled="" type="checkbox"> 模型机有 2×H100 80GB，仿真机有 1×L40S&#x2F;RTX 6000 Ada 48GB。</li>
+<li><input disabled="" type="checkbox"> 两台机器使用同一内网，但只向仿真机开放 TCP 5000。</li>
+<li><input disabled="" type="checkbox"> 两台机器的 DreamZero commit 均为 <code>ab790c1</code>。</li>
+<li><input disabled="" type="checkbox"> <code>sim-evals</code> commit 为 <code>3a6b0e8</code>。</li>
+<li><input disabled="" type="checkbox"> 模型机存在 10 个 <code>model-*.safetensors</code> 分片。</li>
+<li><input disabled="" type="checkbox"> 模型机 A1 的服务保持运行，A2 能看到 5000 端口和双卡显存占用。</li>
+<li><input disabled="" type="checkbox"> 仿真机可以通过 <code>nc -vz MODEL_IP 5000</code> 连接模型机。</li>
+<li><input disabled="" type="checkbox"> Scene 1、2、3 各生成至少一个 <code>episode_0.mp4</code>。</li>
+<li><input disabled="" type="checkbox"> 仿真录像和模型预测视频已分开保存和解释。</li>
+<li><input disabled="" type="checkbox"> 已查看视频并单独记录“链路跑通”与“任务是否成功”。</li>
+</ul>
+<h2 id="14-上游资料"><a href="#14-上游资料" class="headerlink" title="14. 上游资料"></a>14. 上游资料</h2><ul>
+<li>DreamZero：<a target="_blank" rel="noopener" href="https://github.com/dreamzero0/dreamzero">https://github.com/dreamzero0/dreamzero</a></li>
+<li>DreamZero-DROID 权重：<a target="_blank" rel="noopener" href="https://huggingface.co/GEAR-Dreams/DreamZero-DROID">https://huggingface.co/GEAR-Dreams/DreamZero-DROID</a></li>
+<li>DROID 仿真环境：<a target="_blank" rel="noopener" href="https://github.com/arhanjain/sim-evals">https://github.com/arhanjain/sim-evals</a></li>
+<li>DreamZero 论文：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2602.15922">https://arxiv.org/abs/2602.15922</a></li>
+</ul>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/site/logo.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/site/logo.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">Ninja04</div><div class="post-copyright__author_desc">Ninja's Blog</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://ninjalog27.github.io/2026/07/16/dreamzero-official-droid-sim-tutorial/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://ninjalog27.github.io/2026/07/16/dreamzero-official-droid-sim-tutorial/')">DreamZero 官方 DROID 仿真教程：从空机器到生成视频</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://ninjalog27.github.io/2026/07/16/dreamzero-official-droid-sim-tutorial/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ninjalog27.github.io" target="_blank">Ninja</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/DreamZero/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>DreamZero<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/DROID/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>DROID<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/Isaac-Lab/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Isaac Lab<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BB%BF%E7%9C%9F/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>机器人仿真<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>世界模型<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E6%95%99%E7%A8%8B/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>教程<span class="tagsPageCount">1</span></a></div></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2026/07/15/hello-world/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/site/covers/1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Hello World</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/site/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description">欢迎来到 Ninja's Blog，愿这些记录也能为你提供参考。</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DreamZero-%E5%AE%98%E6%96%B9-DROID-%E4%BB%BF%E7%9C%9F%EF%BC%9A%E4%BB%8E%E7%A9%BA%E6%9C%BA%E5%99%A8%E5%88%B0%E7%94%9F%E6%88%90%E8%A7%86%E9%A2%91"><span class="toc-number">1.</span> <span class="toc-text">DreamZero 官方 DROID 仿真：从空机器到生成视频</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%8C%E6%88%90%E5%90%8E%E4%BD%A0%E4%BC%9A%E5%BE%97%E5%88%B0%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.</span> <span class="toc-text">1. 完成后你会得到什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9C%AC%E6%95%99%E7%A8%8B%E4%BD%BF%E7%94%A8%E7%9A%84%E6%9C%BA%E5%99%A8"><span class="toc-number">1.2.</span> <span class="toc-text">2. 本教程使用的机器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%9C%BA-A"><span class="toc-number">1.2.1.</span> <span class="toc-text">模型机 A</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BF%E7%9C%9F%E6%9C%BA-B"><span class="toc-number">1.2.2.</span> <span class="toc-text">仿真机 B</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%A6%81%E6%B1%82"><span class="toc-number">1.2.3.</span> <span class="toc-text">网络要求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%9B%BA%E5%AE%9A%E4%BB%A3%E7%A0%81%E7%89%88%E6%9C%AC"><span class="toc-number">1.3.</span> <span class="toc-text">3. 固定代码版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%A8%A1%E5%9E%8B%E6%9C%BA-A%EF%BC%9A%E5%AE%89%E8%A3%85-DreamZero"><span class="toc-number">1.4.</span> <span class="toc-text">4. 模型机 A：安装 DreamZero</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%A3%80%E6%9F%A5-GPU-%E5%92%8C%E7%A3%81%E7%9B%98"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 检查 GPU 和磁盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7"><span class="toc-number">1.4.2.</span> <span class="toc-text">4.2 安装系统工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E5%AE%89%E8%A3%85-Miniconda"><span class="toc-number">1.4.3.</span> <span class="toc-text">4.3 安装 Miniconda</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E5%85%8B%E9%9A%86-DreamZero"><span class="toc-number">1.4.4.</span> <span class="toc-text">4.4 克隆 DreamZero</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-%E5%88%9B%E5%BB%BA-Python-%E7%8E%AF%E5%A2%83"><span class="toc-number">1.4.5.</span> <span class="toc-text">4.5 创建 Python 环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-%E9%AA%8C%E8%AF%81-Python%E3%80%81Torch-%E5%92%8C-GPU"><span class="toc-number">1.4.6.</span> <span class="toc-text">4.6 验证 Python、Torch 和 GPU</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%A8%A1%E5%9E%8B%E6%9C%BA-A%EF%BC%9A%E4%B8%8B%E8%BD%BD-DreamZero-DROID-%E6%9D%83%E9%87%8D"><span class="toc-number">1.5.</span> <span class="toc-text">5. 模型机 A：下载 DreamZero-DROID 权重</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E4%B8%8B%E8%BD%BD%E4%B8%8D%E5%90%AB-TensorRT-%E7%9A%84-PyTorch-%E6%9D%83%E9%87%8D"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1 下载不含 TensorRT 的 PyTorch 权重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E9%AA%8C%E8%AF%81%E6%9D%83%E9%87%8D%E5%AE%8C%E6%95%B4%E6%80%A7"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2 验证权重完整性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E4%BB%BF%E7%9C%9F%E6%9C%BA-B%EF%BC%9A%E5%AE%89%E8%A3%85-DROID-Isaac-Lab-%E7%8E%AF%E5%A2%83"><span class="toc-number">1.6.</span> <span class="toc-text">6. 仿真机 B：安装 DROID Isaac Lab 环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E6%A3%80%E6%9F%A5-GPU-%E5%92%8C%E7%A3%81%E7%9B%98"><span class="toc-number">1.6.1.</span> <span class="toc-text">6.1 检查 GPU 和磁盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7"><span class="toc-number">1.6.2.</span> <span class="toc-text">6.2 安装系统工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E5%85%8B%E9%9A%86-DreamZero"><span class="toc-number">1.6.3.</span> <span class="toc-text">6.3 克隆 DreamZero</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E5%85%8B%E9%9A%86%E5%B9%B6%E5%AE%89%E8%A3%85-sim-evals"><span class="toc-number">1.6.4.</span> <span class="toc-text">6.4 克隆并安装 sim-evals</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-%E4%B8%8B%E8%BD%BD-DROID-%E4%BB%BF%E7%9C%9F%E8%B5%84%E4%BA%A7"><span class="toc-number">1.6.5.</span> <span class="toc-text">6.5 下载 DROID 仿真资产</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%90%AF%E5%8A%A8%E9%A1%BA%E5%BA%8F"><span class="toc-number">1.7.</span> <span class="toc-text">7. 启动顺序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E6%A8%A1%E5%9E%8B%E6%9C%BA-A%EF%BC%9A%E5%90%AF%E5%8A%A8-DreamZero-%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.7.1.</span> <span class="toc-text">7.1 模型机 A：启动 DreamZero 服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E6%A8%A1%E5%9E%8B%E6%9C%BA-A%EF%BC%9A%E6%A3%80%E6%9F%A5%E7%AB%AF%E5%8F%A3%E5%92%8C%E6%98%BE%E5%AD%98"><span class="toc-number">1.7.2.</span> <span class="toc-text">7.2 模型机 A：检查端口和显存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E4%BB%BF%E7%9C%9F%E6%9C%BA-B%EF%BC%9A%E6%A3%80%E6%9F%A5%E7%BD%91%E7%BB%9C"><span class="toc-number">1.7.3.</span> <span class="toc-text">7.3 仿真机 B：检查网络</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E4%BB%BF%E7%9C%9F%E6%9C%BA-B%EF%BC%9A%E5%85%88%E8%B7%91-Scene-1"><span class="toc-number">1.8.</span> <span class="toc-text">8. 仿真机 B：先跑 Scene 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-Scene-1-%E5%AE%8C%E6%88%90%E5%90%8E%E6%89%BE%E8%A7%86%E9%A2%91"><span class="toc-number">1.8.1.</span> <span class="toc-text">8.1 Scene 1 完成后找视频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E5%9C%A8%E6%A8%A1%E5%9E%8B%E6%9C%BA%E6%9F%A5%E9%A2%84%E6%B5%8B%E8%A7%86%E9%A2%91"><span class="toc-number">1.8.2.</span> <span class="toc-text">8.2 在模型机查预测视频</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E4%BE%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Scene-2-%E5%92%8C-Scene-3"><span class="toc-number">1.9.</span> <span class="toc-text">9. 依次运行 Scene 2 和 Scene 3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-Scene-2"><span class="toc-number">1.9.1.</span> <span class="toc-text">9.1 Scene 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-Scene-3"><span class="toc-number">1.9.2.</span> <span class="toc-text">9.2 Scene 3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E2%80%9C%E8%B7%91%E9%80%9A%E2%80%9D%E5%92%8C%E2%80%9C%E4%BB%BB%E5%8A%A1%E6%88%90%E5%8A%9F%E2%80%9D"><span class="toc-number">1.10.</span> <span class="toc-text">10. 如何判断“跑通”和“任务成功”</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%91%E9%80%9A"><span class="toc-number">1.10.1.</span> <span class="toc-text">跑通</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%88%90%E5%8A%9F"><span class="toc-number">1.10.2.</span> <span class="toc-text">任务成功</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%81%9C%E6%AD%A2%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.11.</span> <span class="toc-text">11. 停止服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E5%B8%B8%E8%A7%81%E6%95%85%E9%9A%9C"><span class="toc-number">1.12.</span> <span class="toc-text">12. 常见故障</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E6%9C%80%E7%BB%88%E6%A3%80%E6%9F%A5%E6%B8%85%E5%8D%95"><span class="toc-number">1.13.</span> <span class="toc-text">13. 最终检查清单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E4%B8%8A%E6%B8%B8%E8%B5%84%E6%96%99"><span class="toc-number">1.14.</span> <span class="toc-text">14. 上游资料</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/07/16/dreamzero-official-droid-sim-tutorial/" title="DreamZero 官方 DROID 仿真教程：从空机器到生成视频"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/site/covers/0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DreamZero 官方 DROID 仿真教程：从空机器到生成视频"/></a><div class="content"><a class="title" href="/2026/07/16/dreamzero-official-droid-sim-tutorial/" title="DreamZero 官方 DROID 仿真教程：从空机器到生成视频">DreamZero 官方 DROID 仿真教程：从空机器到生成视频</a><time datetime="2026-07-16T07:30:00.000Z" title="发表于 2026-07-16 15:30:00">2026-07-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/15/hello-world/" title="Hello World"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/site/covers/1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2026/07/15/hello-world/" title="Hello World">Hello World</a><time datetime="2026-07-15T03:49:34.874Z" title="发表于 2026-07-15 11:49:34">2026-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/28/%E4%B8%AA%E4%BA%BA%E7%AB%99%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/" title="个人站搭建流程"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/site/covers/0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="个人站搭建流程"/></a><div class="content"><a class="title" href="/2026/03/28/%E4%B8%AA%E4%BA%BA%E7%AB%99%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/" title="个人站搭建流程">个人站搭建流程</a><time datetime="2026-03-28T11:51:55.000Z" title="发表于 2026-03-28 19:51:55">2026-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E7%AC%94%E8%AE%B0/" title="我的第一篇笔记"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/site/covers/2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我的第一篇笔记"/></a><div class="content"><a class="title" href="/2026/03/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E7%AC%94%E8%AE%B0/" title="我的第一篇笔记">我的第一篇笔记</a><time datetime="2026-03-28T02:30:00.000Z" title="发表于 2026-03-28 10:30:00">2026-03-28</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2026 By <a class="footer-bar-link" href="/" title="Ninja04" target="_blank">Ninja04</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" href="/" title="本站">本站</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">2</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">站点</div><div class="back-menu-list"><a class="back-menu-item" href="/archives/" title="归档"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/site/logo.png" alt="归档"/><span class="back-menu-item-text">归档</span></a><a class="back-menu-item" href="/categories/" title="分类"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/site/logo.png" alt="分类"/><span class="back-menu-item-text">分类</span></a><a class="back-menu-item" href="/tags/" title="标签"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/site/logo.png" alt="标签"/><span class="back-menu-item-text">标签</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">更多</div><div class="back-menu-list"><a class="back-menu-item" href="/about/" title="关于本站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/site/logo.png" alt="关于本站"/><span class="back-menu-item-text">关于本站</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本站</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/DROID/" style="font-size: 0.88rem;">DROID<sup>1</sup></a><a href="/tags/DreamZero/" style="font-size: 0.88rem;">DreamZero<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Isaac-Lab/" style="font-size: 0.88rem;">Isaac Lab<sup>1</sup></a><a href="/tags/%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B/" style="font-size: 0.88rem;">世界模型<sup>1</sup></a><a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 0.88rem;">博客<sup>1</sup></a><a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 0.88rem;">教程<sup>1</sup></a><a href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BB%BF%E7%9C%9F/" style="font-size: 0.88rem;">机器人仿真<sup>1</sup></a><a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 0.88rem;">测试<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;null&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2026 By 安知鱼 V1.7.1",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 Ninja04 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

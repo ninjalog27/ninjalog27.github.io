@@ -120,7 +120,7 @@ window.addEventListener("load", () => {
         data.forEach(data => {
           let isMatch = true;
           let dataTitle = data.title ? data.title.trim().toLowerCase() : "";
-          const dataTags = Array.isArray(data.tags) ? data.tags : [];
+          let dataTags = data.tags;
           let oneImage = data.oneImage ?? "";
           const dataContent = data.content
             ? data.content
@@ -255,10 +255,6 @@ window.addEventListener("load", () => {
         $resultContent.innerHTML = str;
         if (keywords[0] !== "") $loadingStatus.innerHTML = "";
         window.pjax && window.pjax.refresh($resultContent);
-      }).catch(error => {
-        console.error("Local search index could not be loaded:", error);
-        $loadingStatus.innerHTML = "";
-        $resultContent.innerHTML = '<div id="local-search__hits-empty">搜索数据加载失败，请刷新页面后重试。</div>';
       });
     });
   };
